@@ -162,8 +162,8 @@
                                                 <button type="submit" class="btn btn-primary btn-custom-border text-uppercase">Отправить сообщение</button>
                                             </span>
                                         </div>
-                                        <div class="msg-success">Your Message was sent successfully</div>
-                                        <div class="msg-failed">Something went wrong, please try again later</div>
+                                        <div class="msg-success">Ваше сообщение успешно отправленно!</div>
+                                        <div class="msg-failed">Что-то пошло не так, пожалуйста попробуйте позже!</div>
                                     </div> <!-- ./col- -->
                                 </form> <!-- /.row -->
                             </div> <!-- /.col- -->
@@ -197,5 +197,27 @@
         <script src="js/jquery-validation.min.js"></script>
         <script src="js/form.min.js"></script>
         <script src="js/main.js"></script>
+
+<!-- Скрипт для работы формы обратной связи -->
+<script>
+document.getElementById('contact-form').addEventListener('submit', function(evt){
+  var http = new XMLHttpRequest(), f = this;
+  evt.preventDefault();
+  http.open("post", "contacts.php", true);
+  http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  http.send("name=" + f.name.value + "&contactFF=" + f.contact.value + "&message=" + f.message.value);
+  http.onreadystatechange = function() {
+    if (http.readyState == 4 && http.status == 200) {
+      alert(http.responseText + ', Ваше сообщение получено.\nБлагодарю за интерес к моей персоне!');
+      f.message.removeAttribute('value'); // очистить поле сообщения (две строки)
+      f.message.value='';
+    }
+  }
+  http.onerror = function() {
+    alert('Извините, данные не были переданы');
+  }
+}, false);
+</script>
+
     </body>
 </html>
