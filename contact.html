@@ -205,7 +205,7 @@ document.getElementById('contact-form').addEventListener('submit', function(evt)
   evt.preventDefault();
   http.open("post", "contacts.php", true);
   http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  http.send("name=" + f.name.value + "&contactFF=" + f.contact.value + "&message=" + f.message.value);
+  http.send("name=" + f.name.value + "&contact=" + f.contact.value + "&message=" + f.message.value);
   http.onreadystatechange = function() {
     if (http.readyState == 4 && http.status == 200) {
       alert(http.responseText + ', Ваше сообщение получено.\nБлагодарю за интерес к моей персоне!');
